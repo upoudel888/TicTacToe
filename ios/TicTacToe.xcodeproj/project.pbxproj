@@ -14,6 +14,9 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		7699B88040F8A987B510C191 /* libPods-TicTacToe-TicTacToeTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-TicTacToe-TicTacToeTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		3B82741B10854975A186F005 /* Guritno Demo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DF7D30BA14F64AF8B32CDCC4 /* Guritno Demo.ttf */; };
+		4E69D00663EC48AE9A338BE7 /* GuritnoDemoOutline.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0858BD222A3348CDB3F28E5F /* GuritnoDemoOutline.ttf */; };
+		38A50A3EE61B4C99BE323494 /* Rubik Doodle Shadow.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 183AD5E5310E4F439307B313 /* Rubik Doodle Shadow.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +47,9 @@
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = TicTacToe/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-TicTacToe-TicTacToeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TicTacToe-TicTacToeTests.release.xcconfig"; path = "Target Support Files/Pods-TicTacToe-TicTacToeTests/Pods-TicTacToe-TicTacToeTests.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		DF7D30BA14F64AF8B32CDCC4 /* Guritno Demo.ttf */ = {isa = PBXFileReference; name = "Guritno Demo.ttf"; path = "../assets/fonts/Guritno Demo.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		0858BD222A3348CDB3F28E5F /* GuritnoDemoOutline.ttf */ = {isa = PBXFileReference; name = "GuritnoDemoOutline.ttf"; path = "../assets/fonts/GuritnoDemoOutline.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		183AD5E5310E4F439307B313 /* Rubik Doodle Shadow.ttf */ = {isa = PBXFileReference; name = "Rubik Doodle Shadow.ttf"; path = "../assets/fonts/Rubik Doodle Shadow.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +128,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				5B6028A0B2B54DE386D012B7 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -147,6 +154,17 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		5B6028A0B2B54DE386D012B7 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				DF7D30BA14F64AF8B32CDCC4 /* Guritno Demo.ttf */,
+				0858BD222A3348CDB3F28E5F /* GuritnoDemoOutline.ttf */,
+				183AD5E5310E4F439307B313 /* Rubik Doodle Shadow.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -243,6 +261,9 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				3B82741B10854975A186F005 /* Guritno Demo.ttf in Resources */,
+				4E69D00663EC48AE9A338BE7 /* GuritnoDemoOutline.ttf in Resources */,
+				38A50A3EE61B4C99BE323494 /* Rubik Doodle Shadow.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

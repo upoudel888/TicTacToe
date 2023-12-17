@@ -1,118 +1,150 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import React, { useState, useRef, MutableRefObject } from "react";
+import { Alert, Button, Text, TouchableHighlight, View } from "react-native";
 
-import React from 'react';
-import type {PropsWithChildren} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import { StyleSheet } from "react-native";
+import Crossword, { CrosswordInterface } from "./modules/Crossword";
 
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+const Grid = () => {
+  const game: MutableRefObject<CrosswordInterface> = useRef<CrosswordInterface>(
+    new Crossword()
   );
-}
+  const [grid, setGrid] = useState<[string, string, string][]>(
+    game.current.getGrid()
+  );
+  const [turnStatus, setTurnStatus] = useState<string>(
+    game.current.getTurnStatus()
+  );
+  const [isOver, setIsOver] = useState<Boolean>(game.current.checkOver());
 
-function App(): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
+  const handleCellClick = (pressPos: number) => {
+    let status = game.current.makeMove(pressPos);
+    if (status === "Success") {
+      setGrid(game.current.getGrid());
+      if (game.current.checkOver()) {
+        setIsOver(true);
+        console.log(turnStatus);
+        console.log(game.current.getWinningPositions());
+      } else {
+        game.current.changeTurn();
+        setTurnStatus(game.current.getTurnStatus());
+      }
+    }
+  };
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
+  const handleReplay = () => {
+    game.current = new Crossword();
+    setGrid(game.current.getGrid());
+    setTurnStatus(game.current.getTurnStatus());
+    setIsOver(false);
   };
 
   return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar
-        barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
-      />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
-}
+    <>
+      <View>
+        <Text>{turnStatus}'s Turn</Text>
+      </View>
 
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
+      <View style={gridStyles.gridContainer}>
+        {isOver && (
+          <View style={gridStyles.overlay}>
+            <Button title="Play Again" onPress={handleReplay} />
+          </View>
+        )}
+
+        <View style={gridStyles.gridContainerInner}>
+          {grid.map((grid_row, index_row) => {
+            return (
+              <View style={gridStyles.gridRows} key={index_row}>
+                {grid_row.map((cell, index) => {
+                  return (
+                    <TouchableHighlight
+                      onPress={() => {
+                        handleCellClick(index_row * 3 + index);
+                      }}
+                      underlayColor="white"
+                      key={index}
+                      style={gridStyles.gridCells}
+                    >
+                      <View key={index} style={gridStyles.gridCells}>
+                        <Text style={gridStyles.largeTexts}>{cell}</Text>
+                      </View>
+                    </TouchableHighlight>
+                  );
+                })}
+              </View>
+            );
+          })}
+        </View>
+      </View>
+    </>
+  );
+};
+
+const YourApp = () => {
+  return (
+    <View style={gridStyles.main}>
+      <Grid />
+    </View>
+  );
+};
+
+const gridStyles = StyleSheet.create({
+  main: {
+    flex: 1,
+    gap: 32,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#002f41",
   },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
+  gridContainer: {
+    backgroundColor: "#61b8d3",
+    width: "75%",
+    aspectRatio: "1/1",
+    position: "relative",
+    overflow: "hidden",
   },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
+  gridContainerInner: {
+    width: "100%",
+    height: "100%",
+    transform: "scale(1.02)",
   },
-  highlight: {
-    fontWeight: '700',
+  overlay: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+    zIndex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  gridRows: {
+    flex: 1,
+    gap: 5,
+    width: "100%",
+    height: "35%",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    borderColor: "white",
+  },
+  gridCells: {
+    flexGrow: 1,
+    aspectRatio: "1/1",
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#002f41",
+    transform: "scaleY(1)",
+  },
+  largeTexts: {
+    overflow: "visible",
+    fontWeight: "300",
+    color: "#61b8d3",
+    fontSize: 90,
+    lineHeight: 90,
   },
 });
 
-export default App;
+export default YourApp;
