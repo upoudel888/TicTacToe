@@ -1,0 +1,17 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Guritno Demo.ttf",
+      "sha1": "39ad710a3f4b0c5c5fa8a514ce0297f6ffdfa029"
+    },
+    {
+      "path": "assets/fonts/GuritnoDemoOutline.ttf",
+      "sha1": "9f2f7c9d605986bf534d03615bc4b81894b90ed2"
+    },
+    {
+      "path": "assets/fonts/Rubik Doodle Shadow.ttf",
+      "sha1": "1b0092781395a98142548d15929cfbb2c16e2334"
+    }
+  ]
+}
