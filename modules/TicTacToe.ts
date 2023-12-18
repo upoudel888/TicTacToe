@@ -1,6 +1,6 @@
 type successStatus = string;
 
-export interface CrosswordInterface {
+export interface TicTacToeInterface {
   grid: [string, string, string][];
   turn: string;
   winPos: [number, number, number];
@@ -9,10 +9,11 @@ export interface CrosswordInterface {
   makeMove(position: number): successStatus;
   changeTurn(): void;
   checkOver(): Boolean;
+  getOverMsg(): String;
   getWinningPositions(): [number, number, number];
 }
 
-export default class Crossword implements CrosswordInterface {
+export default class TicTacToe implements TicTacToeInterface {
   grid: [string, string, string][] = [
     ["", "", ""],
     ["", "", ""],
@@ -91,9 +92,24 @@ export default class Crossword implements CrosswordInterface {
       return true;
     }
     // no winning conditons satisfied
-    return false;
+    let movesPlayed: number = 0;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (this.grid[i][j] !== "") {
+          movesPlayed += 1;
+        }
+      }
+    }
+    return movesPlayed === 9;
   }
-
+  getOverMsg() {
+    // when there's draw this.winPos is never updated
+    if (JSON.stringify(this.winPos) === JSON.stringify([0, 0, 0])) {
+      return "Draw !";
+    } else {
+      return `${this.turn.toUpperCase()} Won !`;
+    }
+  }
   getWinningPositions(): [number, number, number] {
     return this.winPos;
   }
